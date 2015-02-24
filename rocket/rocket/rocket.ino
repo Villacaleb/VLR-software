@@ -1,11 +1,6 @@
-/* Sweep
- by BARRAGAN <http://barraganstudio.com> 
- This example code is in the public domain.
-
- modified 8 Nov 2013
- by Scott Fitzgerald
- http://arduino.cc/en/Tutorial/Sweep
-*/ 
+/*
+VLR, Villa Light Rocket is a model rocket being developed by Caleb Bird this software is used for the parachute deployed system
+*/
 
 #include <Servo.h> 
  
@@ -30,7 +25,7 @@ void loop()
 { 
   inputsatus = digitalRead(inPin);
   
-  if(inputsatus == HIGH){
+  if(inputsatus == HIGH){ // The launch controller is contected to the arduino, if there is a pulse, the same one that sets off the ignitor, it will count down 10 seconds (this may change) after 10 seconds, the motor pushes the nose cone out with the parachute.
     val = 1;
   }
   if(val = 1){
