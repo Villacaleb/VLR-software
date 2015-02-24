@@ -12,12 +12,9 @@ Thanks to Jeremy Hall for some help with the code and developing the parashute r
 
 
  
-Servo releaseservo;  // create servo object to control a servo
-Servo lockservo; 
-                // twelve servo objects can be created on most boards
+Servo releaseservo;  // create servo object to control a servos
  
 int pos = 0;  // variable to store the servo position 
-int pos2 = 0;
 int ledPin = 13;
 int inPin = 7;
 int inputsatus = 0;
@@ -26,11 +23,9 @@ boolean launchpermission = false;
 void setup() 
 { 
   releaseservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  lockservo.attach(10); 
   pinMode(ledPin, OUTPUT);
   pinMode(inPin, INPUT);
   releaseservo.write(pos);
-  lockservo.write(pos);
   Serial.begin(38400);
  // dataFile.println("Initializing Parachute Deployment Setup");
 } 
@@ -39,42 +34,63 @@ void loop()
 { 
   
   val = digitalRead(inPin);
-  if(val == high){
-      launchpermission == true;
+  if(val == HIGH){
+      launchpermission = true;
   }
   if(launchpermission == true){
     //dataFile.println("Tesiting motors")
     
     //It will start testing the motors, making sure they are working, you should be able to hear them working, if you cant, then you can shut it off.
-    int pos = 100;
+    pos = 100;
     releaseservo.write(pos);
-    int pos2 == 100;
-    lockservo.write(pos);
     delay(1500); // these delays give it enough time to move.
-    int pos = 0;
+    pos = 0;
     releaseservo.write(pos);
-    int pos2 == 0;
-    lockservo.write(pos);
     delay(1500);
-    int pos = 100;
+    pos = 100;
     releaseservo.write(pos);
-    int pos2 == 100;
-    lockservo.write(pos);
     delay(1500);
-    int pos = 0;
+    pos = 10;
     releaseservo.write(pos);
-    int pos2 == 0;
-    lockservo.write(pos);
     delay(1500);
     
     delay(15000); // Gives you enough time to check the motors.
+    // the motors move into place.
+    int pos = 0;
+    releaseservo.write(pos);
     
+    if(val == HIGH){ // This will wait for another input, giving you the all clear.
+    delay(30000);
+    // for debugging, this means its launching
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);
+    delay(1000);
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);
+    delay(1000);
     
-    delay(10000);
+    delay(10000); //the engines burn rate
+    // datafile.println("unlocking parachute");
+    delay(800); // gives it enough time to unlock, then deploys the parachute
+    
     // dataFile.println("Deploying Parachute")
     pos = 180;
     releaseservo.write(pos);
-  } else {
-  }
+    while(true){ // Need to make sure the arduino and everything survived...
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);
+    
+    pos = 100;
+    releaseservo.write(pos);
+    delay(1500); // these delays give it enough time to move.
+    pos = 0;
+    releaseservo.write(pos);
+    delay(1500);
+    }
+    }
   
  }
+}
