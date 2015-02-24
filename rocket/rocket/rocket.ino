@@ -28,19 +28,14 @@ void setup()
   pinMode(inPin, INPUT);
   releaseservo.write(pos);
   Serial.begin(38400);
-  dataFile.println("Initializing Parachute Deployment Setup");
+ // dataFile.println("Initializing Parachute Deployment Setup");
 } 
  
 void loop() 
 { 
-  inputsatus = digitalRead(inPin);
-  
-  if(inputsatus == HIGH){ // The launch controller is contected to the arduino, if there is a pulse, the same one that sets off the ignitor, it will count down 10 seconds (this may change) after 10 seconds, the motor pushes the nose cone out with the parachute.
-    val = 1;
-    dataFile.println("Launch Sequence Initiated");
-  }
-  if(val = 1){
-    dataFile.println("Deploying Parachute");
+  val = digitalRead(inPin);
+  if(val == HIGH){
+   // dataFile.println("Deploying Parachute")
     delay(10000);
     pos = 180;
     releaseservo.write(pos);
