@@ -34,7 +34,6 @@ void loop()
     releaseservo.write(pos);
   } else {
   }
-  delay(5000);
   
  }
 
