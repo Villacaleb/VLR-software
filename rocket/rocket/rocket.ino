@@ -20,6 +20,7 @@ int inPin = 7;
 int inputsatus = 0;
 int val = 0;
 boolean launchpermission = false;
+
 void setup() 
 { 
   releaseservo.attach(9);  // attaches the servo on pin 9 to the servo object
@@ -34,23 +35,43 @@ void loop()
 { 
   
   val = digitalRead(inPin);
-  if(val == HIGH){
-      launchpermission = true;
+  if(val == LOW){
+  launchpermission = true;
   }
   if(launchpermission == true){
     //dataFile.println("Tesiting motors")
-    
+    digitalWrite(ledPin, HIGH);
     //It will start testing the motors, making sure they are working, you should be able to hear them working, if you cant, then you can shut it off.
-    pos = 100;
+    pos = 35;
+    digitalWrite(ledPin, HIGH);
     releaseservo.write(pos);
     delay(1500); // these delays give it enough time to move.
-    pos = 0;
+    pos = 10;
+    digitalWrite(ledPin, LOW);
     releaseservo.write(pos);
     delay(1500);
-    pos = 100;
+    pos = 35;
+    digitalWrite(ledPin, HIGH);
     releaseservo.write(pos);
     delay(1500);
     pos = 10;
+    digitalWrite(ledPin, LOW);
+    releaseservo.write(pos);
+    delay(1500);
+    pos = 35;
+    digitalWrite(ledPin, HIGH);
+    releaseservo.write(pos);
+    delay(1500);
+    pos = 10;
+    digitalWrite(ledPin, LOW);
+    releaseservo.write(pos);
+    delay(1500);
+    pos = 35;
+    digitalWrite(ledPin, HIGH);
+    releaseservo.write(pos);
+    delay(1500);
+    pos = 10;
+    digitalWrite(ledPin, LOW);
     releaseservo.write(pos);
     delay(1500);
     
@@ -59,8 +80,9 @@ void loop()
     int pos = 0;
     releaseservo.write(pos);
     
-    if(val == HIGH){ // This will wait for another input, giving you the all clear.
-    delay(30000);
+    if(val == LOW){ // This will wait for another input, giving you the all clear.
+    delay(30000); //30 second countdown to run away
+    
     // for debugging, this means its launching
     digitalWrite(ledPin, HIGH);
     delay(1000);
@@ -71,13 +93,14 @@ void loop()
     digitalWrite(ledPin, LOW);
     delay(1000);
     
-    delay(10000); //the engines burn rate
+    delay(10000); //the engines burn time
     // datafile.println("unlocking parachute");
     delay(800); // gives it enough time to unlock, then deploys the parachute
     
     // dataFile.println("Deploying Parachute")
     pos = 180;
     releaseservo.write(pos);
+    
     while(true){ // Need to make sure the arduino and everything survived...
     digitalWrite(ledPin, HIGH);
     delay(1000);
@@ -86,7 +109,7 @@ void loop()
     pos = 100;
     releaseservo.write(pos);
     delay(1500); // these delays give it enough time to move.
-    pos = 0;
+    pos = 10;
     releaseservo.write(pos);
     delay(1500);
     }
