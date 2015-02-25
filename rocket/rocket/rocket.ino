@@ -1,5 +1,5 @@
 /*
-VLR, Villa Light Rocket is a model rocket being developed by Caleb Bird this software is used for the parachute deployed system
+VLR, Villa Lite Rocket is a model rocket being developed by Caleb Bird this software is used for the parachute deployed system
 
 Developed by Caleb Bird.
 
@@ -35,10 +35,14 @@ void loop()
 { 
   
   val = digitalRead(inPin);
+  /*
   if(val == LOW){
   launchpermission = true;
+  digitalWrite(ledPin, HIGH);
   }
-  if(launchpermission == true){
+  */
+  
+  if(val == LOW){
     //dataFile.println("Tesiting motors")
     digitalWrite(ledPin, HIGH);
     //It will start testing the motors, making sure they are working, you should be able to hear them working, if you cant, then you can shut it off.
@@ -79,8 +83,10 @@ void loop()
     // the motors move into place.
     int pos = 0;
     releaseservo.write(pos);
-    
-    if(val == LOW){ // This will wait for another input, giving you the all clear.
+    if(val == LOW){
+    digitalWrite(ledPin, HIGH);
+    delay(3000);
+    digitalWrite(ledPin, LOW);
     delay(30000); //30 second countdown to run away
     
     // for debugging, this means its launching
@@ -100,6 +106,7 @@ void loop()
     // dataFile.println("Deploying Parachute")
     pos = 180;
     releaseservo.write(pos);
+    delay(7000);
     
     while(true){ // Need to make sure the arduino and everything survived...
     digitalWrite(ledPin, HIGH);
@@ -114,6 +121,5 @@ void loop()
     delay(1500);
     }
     }
-  
  }
 }
