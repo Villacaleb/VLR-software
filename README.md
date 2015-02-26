@@ -1,4 +1,4 @@
-VLR-Software is protected unti the GPL 3.0 license. See more at http://www.gnu.org/copyleft/gpl.html
+VLR-Software is protected by the GPL 3.0 license. See more at http://www.gnu.org/copyleft/gpl.html
 
 # VLR-software
 the software for VLR
